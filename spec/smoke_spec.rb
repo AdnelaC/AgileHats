@@ -1,11 +1,10 @@
 require 'spec_helper'
-require 'watir-webdriver'
+
+
 
 
 RSpec.describe "Smoke test" do
 
-
-	
 
 	let(:email) {"adneela@hotmail.com"}
 	let(:password) {"adnela"}
@@ -17,26 +16,16 @@ RSpec.describe "Smoke test" do
 	let(:responsibility) {"New respoo"}
 	let (:description) {"Descriptiooon"}
 	let (:ime) {"Adnela Cavcic"}
-	
+	let(:login) { Login.new(@browser)}
+	let(:projekat) {Project.new(@browser)}
 
-
-	before(:all){
-  			@browser = Watir::Browser.new :firefox
-  			@browser.goto "http://ah-test.abhapp.com/login" 
-  		}
-
-	
-
-
-		 
+	 
     context "Login page" do
 	
         it "Successful login" do
-			@browser.text_field(:id,"ember592").set(email)
-		    @browser.text_field(:id ,"ember593").set(password)
-			@browser.button(:type ,"submit" ).click
-			@browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
-			expect(@browser.text).to include(ime)
+	       login.login_user(email, password, ime)
+	       @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
+		   expect(@browser.text).to include(ime)
 			
 		
 		end
@@ -51,8 +40,8 @@ RSpec.describe "Smoke test" do
 
 	   it "Switch to Projects Page" do
 
-	   	  @browser.link(:text =>"PROJECTS").when_present(timeout=300).click
-		  @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects"}
+          projekat.clickon_project 
+          @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects"}
 		  expect(@browser.text).to include("All projects")
 	  end
 
@@ -63,7 +52,7 @@ RSpec.describe "Smoke test" do
 
 	   it "Page with two options to choose type of Project" do
 
-		  @browser.link(:text =>"Create Project").when_present.click
+		  projekat.clickon_create_project
 		  @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects/new"}
 		  expect(@browser.text).to include("Select type of project")
 		
@@ -75,38 +64,38 @@ RSpec.describe "Smoke test" do
 
 	   it "Page with textboxes to add information about project" do
 
-		 @browser.div(:text, "Funding Project").fire_event :click
+         projekat.clickon_funding_project
 		 @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects/new/funding"}
 		 expect(@browser.text).to include("Create Funding Project")
+
 	   end
    end
 
 
-  
-
+ 
    context "Add information about project" do
+
 
 	    it "Name added" do
 
-		   @browser.text_field(:id, "name").set(project)
+		   projekat.add_name(project)
 
 	   end
 
         it "Information added" do
 
-	      @browser.textarea(:id, "description_why").set(why)
-	      @browser.textarea(:id, "description_what").set(what)
-	      @browser.textarea(:id, "description_how").set(how)
-	   
+	      projekat.add_information(why, what, how)
+	     
 	   end
 
 	   it "Switch to page Invite sponsors" do 
 
-		  @browser.button(:text => "Next").click
+		  projekat.clickon_next
 		  @browser.wait_until{@browser.div(:class=>"search-control sponsors").exists?}
 		  expect(@browser.text).to include("Invite sponsor to backup your project initiative")
 			
 	   end
+
 
    end
 
@@ -117,28 +106,28 @@ RSpec.describe "Smoke test" do
 
 
           @browser.wait_until {@browser.text_field(:class, "autocomplete-input ember-view ember-text-field").exists? }
-		  @browser.text_field(:class=>"autocomplete-input ember-view ember-text-field", :placeholder =>"Search or enter email to add people...").set(sponsor)
-		  @browser.wait_until {@browser.button(:class=>"message btn-link").exists?}
-		  @browser.button(:class=> "message btn-link").click
+		  projekat.add_sponsors(sponsor)
 		  expect(@browser.text.include?(sponsor)).to be true
-
+	   
 	   end
 
 	   it "Switch to Responsibilities tab" do
   
-		  @browser.button(:text, "Next").click
+		  projekat.clickon_next
 		  @browser.wait_until{@browser.div(:class=>"responsibility-label").exists?}
 		  expect(@browser.text).to include("List the responsibilities that are to be covered by project participants / contributors")
 		
 	   end
+   
    end
+
 
    context "Click on button Create new" do 
 
 		it "Form with textboxes to add information about responsibility" do 
 
             @browser.wait_until{@browser.button(:class, "btn btn-gray btn-vacant-responsibility pull-left").exists?}
-			@browser.button(:class, "btn btn-gray btn-vacant-responsibility pull-left").click
+			projekat.clickon_create_new
 			expect(@browser.text).to include("Create New Responsibility")
 		end
 
@@ -148,14 +137,14 @@ RSpec.describe "Smoke test" do
 
 		it "Name added" do
 
-			@browser.text_field(:class, "responsibility-title  error  ember-view ember-text-field").set(responsibility)
+			projekat.resp_name(responsibility)
 			
 		end
 
 		it "Description added" do
 
-			@browser.textarea(:id, "description").set(description)
-			
+			projekat.resp_description(description)
+
 		end
    end
 
@@ -163,7 +152,7 @@ RSpec.describe "Smoke test" do
 
 		it "New responsibility in list" do
 
-			@browser.button(:text, "Save").click
+			projekat.clickon_save
 			expect(@browser.div(:class=>"idea-responsibility-container").exists?)
 	
 		end
@@ -175,7 +164,7 @@ RSpec.describe "Smoke test" do
 	   it "Switch to Attachments page" do
 
 	      @browser.wait_until{@browser.button(:class, 'btn btn-green pull-right').exists? }
-		  @browser.button(:class=>"btn btn-green pull-right", :text => "Next").when_present.click
+		  projekat.clickon_next
 		  @browser.wait_until{(@browser.button(:class=>"btn btn-default select-file")).exists?}
 		  expect(@browser.text).to include("Upload photos, documents, media and other files" )
 			
@@ -184,13 +173,11 @@ RSpec.describe "Smoke test" do
    end
 
    
-
-
    context "Click on Go to Project" do
 
 		it "Switch to Project page" do
 
-			@browser.link(:class,"btn btn-green pull-right ember-view active").when_present.click
+			projekat.clickon_go_to_project
 			@browser.wait_until{@browser.span(:class=> "title project pull-left").exists?}
             expect(@browser.span(:text=>project))
 
@@ -198,32 +185,37 @@ RSpec.describe "Smoke test" do
 
    end
 
+   
    context "Click on Edit Project" do 
 
      	it"Menu for edit" do
 
-   		  @browser.link(:class=>"btn btn-gray btn-edit-project pull-right heading-button ember-view").click 
+   		  projekat.clickon_edit_project 
    	      expect(@browser.button(:class=>"btn btn-delete pull-right"))
 
    	   end
 
    end
 
+   
    context "Click on Icon for delete" do
 
     	it "Pop up menu" do
+    		projekat.clickon_delete
 
-   		   @browser.button(:class=>"btn btn-delete pull-right").click
+   		   
    		  
    	    end
 
    end
 
+   
    context "Click on OK" do
 
    	   it "Project is deleted" do
 
-   		  @browser.alert.ok
+   		  
+   		  projekat.clickon_OK
    		  @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects"}
    		  expect(@browser.text).to include("All projects")
 
@@ -232,37 +224,34 @@ RSpec.describe "Smoke test" do
    end
 
   
-  	
-   context "Click on circle on top right" do
+  context "Click on circle on top right" do
  
     	it "Dropdown menu" do
 
-   		   @browser.image(:class=> "img-circle").click
+           login.clickon_image
    		   expect(@browser.button(:class, ""))
 
     	end
-
-
    end
+
 
    context "Click on Logout item from dropdown menu" do
 
 	   it"User is logged out" do
 
-		  @browser.button(:class, "").click
+		  login.logout
 		  expect(@browser.div(:class=>"header"))
 
 	   end
 
 	   it "Browser close" do
 
-		   @browser.close
+		   login.browser_close
 
 	   end
 
 
    end
-
 
 end 
 
