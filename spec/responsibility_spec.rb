@@ -13,12 +13,11 @@ RSpec.describe "Test Create Responsibility with filled textboxes" do
   context "Login page" do
 	
         it "Successful login" do
-	       login.login_user(email, password, ime)
-	       @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
-		   expect(@browser.text).to include(ime)
-			
-		
-		end
+	          login.login_user(email, password, ime)
+	          @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
+		        expect(@browser.text).to include(ime)
+			  
+        end
 
    end
 
@@ -30,7 +29,7 @@ RSpec.describe "Test Create Responsibility with filled textboxes" do
           responsibility.clickon_responsibilities
           @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/responsibilities"}
 		      expect(@browser.text).to include("Responsibilities")
-	  end
+	   end
 
    end
 
@@ -39,8 +38,8 @@ RSpec.describe "Test Create Responsibility with filled textboxes" do
 
    	   it"Textboxes to add information about Responsibility" do
 
-   		  responsibility.clickon_create_new_responsibility
-   		  expect(@browser.text).to include("Create Responsibility")
+   		     responsibility.clickon_create_new_responsibility
+   		     expect(@browser.text).to include("Create Responsibility")
 
    	   end
    end
@@ -49,13 +48,15 @@ RSpec.describe "Test Create Responsibility with filled textboxes" do
 
    	  it "Name added" do
    		 
-   		  responsibility.add_name(name)
-   	  end
+   		   responsibility.add_name(name)
+   	  
+      end
 
    	   it"Description" do
 
-   		  responsibility.add_description(description)
-   	   end
+   		   responsibility.add_description(description)
+   	   
+       end
    
    end
 
@@ -84,10 +85,10 @@ RSpec.describe "Test Create Responsibility with filled textboxes" do
 
    context "Click on Logout item from dropdown menu" do
 
-	   it"User is logged out" do
+	    it"User is logged out" do
 
-		  login.logout
-		  expect(@browser.div(:class=>"header"))
+		     login.logout
+		     expect(@browser.div(:class=>"header"))
 
 	   end
 

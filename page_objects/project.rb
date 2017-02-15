@@ -105,9 +105,6 @@ class Project
 	end
 
 
-	def logout
-
-	end
 
 
 

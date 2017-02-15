@@ -35,11 +35,13 @@ RSpec.describe "Test Search when Responsibility exist" do
 
    context "Filter by search" do
 
-   	it "Searched responsibility stays in list" do
-   		responsibility.search(name)
-   		expect(@browser.text).to include(name)
-
-   	end
+   	   it "Searched responsibility stays in list" do
+   		
+   		  responsibility.search(name)
+   		  expect(@browser.text).to include(name)
+      
+      end
+   
    end
 
 

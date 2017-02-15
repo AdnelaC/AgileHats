@@ -26,13 +26,9 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 	       @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
 		   expect(@browser.text).to include(ime)
 			
-		
 		end
 
    end
-
-   
-
 
 
     context "Projects tab" do
@@ -42,9 +38,11 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
           projekat.clickon_project 
           @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects"}
 		  expect(@browser.text).to include("All projects")
+	  
 	  end
 
    end
+
    context "Click on button Create Project button" do
 
 	   it "Page with two options to choose type of Project" do
@@ -61,20 +59,25 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 
    	  it "Page with textboxes to add information about project" do
 
-   		projekat.clickon_existing_project
-   		@browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects/new/active"}
-		expect(@browser.text).to include("Create Existing Project")
+   		  projekat.clickon_existing_project
+   		  @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/projects/new/active"}
+		  expect(@browser.text).to include("Create Existing Project")
    	  end
+  
    end
 
 
    context "Click on Next" do
-   	it "Error" do
-   		projekat.clickon_next
-   		expect(@browser.div(:class=>"error-msg")). to exist
-   	end
+
+    	it "Error" do
+
+   		   projekat.clickon_next
+   		   expect(@browser.div(:class=>"error-msg")). to exist
+   	  
+   	   end
 
    end
+
    context "Click on circle on top right" do
  
     	it "Dropdown menu" do
@@ -97,7 +100,7 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 
 	   end
 
-	it "Browser close" do
+	   it "Browser close" do
 
 		   login.browser_close
 
@@ -105,10 +108,5 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 
 
    end
-
-
-
-
-
 
 end
