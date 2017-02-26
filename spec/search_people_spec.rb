@@ -22,10 +22,10 @@ RSpec.describe "Test Search when user exist" do
 		
 		end
 
-   end
+  end
 
 
-   context "People tab" do
+  context "People tab" do
 
    	  it "Switch to People tab" do
 
@@ -34,36 +34,35 @@ RSpec.describe "Test Search when user exist" do
    		  expect(@browser.text).to include("Current Users")
    	  end
 
-   end
+  end
 
-   context "Search people" do
+  context "Search people" do
 
    	  it "Searched user in list" do
    		  
    		  people.search(trazi)
    		  expect(@browser.text).to include(traziemail)
    	   end
-   end
+  end
 
-   context "Click on circle on top right" do
+  context "Click on circle on top right" do
  
     	it "Dropdown menu" do
 
-           login.clickon_image
-   		   expect(@browser.button(:class, ""))
+          login.clickon_image
+   		    expect(@browser.button(:class, ""))
 
     	end
+  
+  end
 
 
-   end
+  context "Click on Logout item from dropdown menu" do
 
+	   it "User is logged out" do
 
-   context "Click on Logout item from dropdown menu" do
-
-	   it"User is logged out" do
-
-		  login.logout
-		  expect(@browser.div(:class=>"header"))
+		     login.logout
+		     expect(@browser.div(:class=>"header"))
 
 	   end
 
@@ -73,9 +72,6 @@ RSpec.describe "Test Search when user exist" do
 
 	   end
 
-
-   end
-
-
+  end
 
 end

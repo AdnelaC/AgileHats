@@ -1,17 +1,35 @@
 class Dashboard
 
-	def initialize 
-		projekti= list<Project> ()
-		responsibilities= list<Responsibility>()
+	@@funding=0
+	broj_existing=0
+	broj_resp=0
+	broj_people=0
+
+	
+
+
+
+
+def initialize browser_init
+	@browser=browser_init
+end
+
+def dodaj_funding 
+	funding=funding+1 
+
+end
+
+    def povecaj_funding
+
+    	broj=@browser.div(:text=>"Funding Project").div(:class=>"number").text.to_i
+    	@browser.div(:text=>"Funding Project").div(:class=>"number").set(broj)
+
+
 	end
 
-	def add_project(pro)
-		projekti.add(pro)
-	end
 
-	def add_resp(resp)
-		responsibilities.add(resp)
-	end
+
+
 	
 	
 

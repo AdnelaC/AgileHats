@@ -2,88 +2,119 @@ require 'spec_helper'
 
 RSpec.describe "Test Create Responsibility with filled textboxes" do
 
-    let(:email) {"adneela@hotmail.com"}
+  let(:email) {"adneela@hotmail.com"}
 	let(:password) {"adnela"}
-	let(:name) {"New respoo"}
-	let(:ime) {"Adnela Cavcic"}
+	let(:responsibility_name) {"Responsibility 1"}
+	let(:name) {"Adnela Cavcic"}
 	let (:description) {"Descriptiooon"}
 	let(:login) { Login.new(@browser)}
 	let(:responsibility) {Responsibility.new(@browser)}
 
   context "Login page" do
-	
+  
         it "Successful login" do
-	          login.login_user(email, password, ime)
-	          @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
-		        expect(@browser.text).to include(ime)
-			  
+
+           login.login_user(email, password, name)
+           @browser.wait_until{@browser.div(:class=>"project-space").exists?}
+           expect(@browser.text).to include(name)
+      
         end
 
-   end
+  end
 
+  context "Resonsibilities tab" do
 
-   context "Resonsibilities tab" do
+     it "Switch to Responsibility Page" do
 
-	   it "Switch to Responsibility Page" do
+          responsibility.click_on_responsibilities
+          @browser.wait_until{@browser.div(:class=>"search pull-right").exist?}
+          expect(@browser.text).to include("Responsibilities")
+    end
 
-          responsibility.clickon_responsibilities
-          @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/responsibilities"}
-		      expect(@browser.text).to include("Responsibilities")
-	   end
+  end
 
-   end
+  
+  context "Click on Create New Responsibility" do
 
+       it "Textboxes to add information about Responsibility" do
 
-   context "Click on Create New Responsibility" do
+           responsibility.click_on_create_new_responsibility
+           expect(@browser.text).to include("Create Responsibility")
 
-   	   it"Textboxes to add information about Responsibility" do
+       end
+  end
 
-   		     responsibility.clickon_create_new_responsibility
-   		     expect(@browser.text).to include("Create Responsibility")
+  
+  context "Add information" do
 
-   	   end
-   end
-
-   context "Add information" do
-
-   	  it "Name added" do
-   		 
-   		   responsibility.add_name(name)
-   	  
+      it "Name added" do
+       
+         responsibility.add_name(responsibility_name)
+      
       end
 
-   	   it"Description" do
+       it"Description" do
 
-   		   responsibility.add_description(description)
-   	   
+         responsibility.add_description(description)
+       
        end
    
-   end
+  end
 
-   context "Click on save" do
+  context "Click on save" do
 
-   	   it "List of responsibilities" do
-   		
-   		   responsibility.clickon_save
-         @browser.wait_until{@browser.url == "http://ah-test.abhapp.com/responsibilities"}
-   		   expect(@browser.text).to include("Responsibilities")
-   	   end
+       it "List of responsibilities" do
+      
+         responsibility.click_on_save
+           @browser.wait_until{@browser.div(:class=>"search pull-right").exist?}
+         expect(@browser.text).to include("Responsibilities")
+       end
    
-   end
+  end
 
-   context "Click on circle on top right" do
+  context "Click on Responsibility" do
+
+      it "Responsibility details" do
+    
+         responsibility.click_on_responsibility
+         expect(@browser.text).to include("About Responsibility")
+
+      end
+  end
+
+  context "Click on Edit Responsibility" do
+
+      it "General info" do
+    
+         responsibility.click_on_edit_responsibility
+         expect(@browser.text).to include("Edit Responsibility")
+
+       end
+  end
+
+  context "Click on delete" do
+
+       it "Popup message" do
+    
+          responsibility.click_on_delete
+
+      end
+  end
+
+
+  context "Click on circle on top right" do
  
     	it "Dropdown menu" do
 
-           login.clickon_image
+           login.click_on_image
    		   expect(@browser.button(:class, ""))
 
     	end
 
 
-   end
+  end
 
-   context "Click on Logout item from dropdown menu" do
+  context "Click on Logout item from dropdown menu" do
 
 	    it"User is logged out" do
 
@@ -99,6 +130,6 @@ RSpec.describe "Test Create Responsibility with filled textboxes" do
 	   end
 
 
-   end
+  end
 
 end

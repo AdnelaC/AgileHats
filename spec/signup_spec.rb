@@ -1,77 +1,83 @@
 require 'spec_helper'
 
 
-
-
 RSpec.describe "Sign up" do
 
 let (:first) {"Ime"}
 let(:last) {"Prezime"}
-let(:email) {"nekimailcicov@gmail.com"}
 let(:password) {"password"}
 let(:confirm) {"password"}
+let(:login) {Login.new(@browser)}
+let(:register) {Register.new(@browser)}
+let(:rng) {Random.new}
+let(:email){"email_"+rng.rand(100).to_s+"@hotmail.com"}
 
-	before(:all){
-		
-  			@browser= Watir::Browser.new :firefox
-  			@browser.goto "http://ah-test.abhapp.com/login" 
-  		
-  		}
 
 
   	context "Click on Sign up" do
 
   		it "Sign up Page" do
-  			@browser.b(:text=>"Sign up").click 
-  			expect(@browser.text).to include("SIGN UP")
-  		end
-  	end
+  			
+         login.click_on_signup
+  			 expect(@browser.text).to include("SIGN UP")
+  		
+      end
+  	
+    end
 
   	context "Add information" do
-  		it "First name added"do
-  		@browser.text_field(:placeholder=>"First name").set(first)
-  	end
 
-  	it "Last name added" do
-  		@browser.text_field(:placeholder=>"Last name").set(last)
-  	end
+  		it "First name added" do
 
-  	it "Email added" do
-  		@browser.text_field(:placeholder=>"Email").set(email)
-  	end
+  			 register.add_firstname(first)
 
-  	it "Password" do
-  		@browser.text_field(:placeholder=>"Password").set(password)
-  	end
+      end
 
-  	it "Confirm Password" do
-  		@browser.text_field(:placeholder=>"Confirm Password").set(confirm)
-  	end
+  	  it "Last name added" do
 
+  		     register.add_lastname(last)
 
+    	end
 
-  	end
+    	it "Email added" do
+
+    		  register.add_email(email)
+
+  		end
+
+  	  it "Password" do
+
+  		   register.add_password(password)
+  	    
+  	  end
+
+  	  it "Confirm Password" do
+
+  	    	register.add_confirmation(confirm)
+
+  		end
+  	
+    end	
 
   	context "Click on button Sign up" do
+
   		it "List of companies" do
-  			@browser.button(:text=>"Sign up").click
+
+  			register.click_on_signup
+
   		end
 
   	end
 
 
   	context "Click on Create one" do
-  		it "New window" do
-
   		
-  			@browser.link(:text=>"Create one").click
+      it "New window" do
+
+            @browser.wait_until(timeout=300){@browser.div(:class=> "spaces-paneul ui-buttonset").exists?}
+  			   register.click_on_createnew
   		end
-
-
-  	end
-
-
-
-
+   
+   end
 
 end
