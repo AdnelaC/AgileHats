@@ -6,7 +6,7 @@ RSpec.describe "Add contact info" do
 	let(:password) {"password"}
 	let(:name) {"Novi Novi"}
 	let(:login) {Login.new(@browser)}
-	let(:profile) {profile.new(@browser)}
+	let(:profile) {Profile.new(@browser)}
 	let(:tel) {"033111222"}
 	let(:skype) {"skype_name"}
 
