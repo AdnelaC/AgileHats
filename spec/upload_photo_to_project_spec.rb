@@ -3,7 +3,7 @@ require 'spec_helper'
 
 
 
-RSpec.describe "Smoke test" do
+RSpec.describe "Upload photo to project" do
 
 
 	let(:email) {"adneela@hotmail.com"}
@@ -12,7 +12,7 @@ RSpec.describe "Smoke test" do
 	let(:why) {"whhhy"}
 	let(:what) {"whaaaat"}
 	let(:how) {"hooow"}
-	let(:sponsor) {"sponsor@email.com"}
+	let(:sponsor) {"neki@email.com"}
 	let(:responsibility) {"New respoo"}
 	let (:description) {"Descriptiooon"}
 	let (:name) {"Adnela Cavcic"}
@@ -183,13 +183,23 @@ RSpec.describe "Smoke test" do
 
 
 	      project.click_on_next
-	      expect(@browser.text).to include("Upload photos, documents, media and other files" )
+		  @browser.wait_until{(@browser.button(:class=>"btn btn-default select-file")).exists?}
+		  expect(@browser.text).to include("Upload photos, documents, media and other files" )
 			
 	    end
 
    end
 
-  
+   context "Upload photo" do
+
+   	it "Photo on page" do
+
+   		project.upload_photo
+   		expect(@browser.img(:alt=>"logo.jpg").exists?)
+
+
+   	end
+   end
 
    
    context "Click on Go to Project" do

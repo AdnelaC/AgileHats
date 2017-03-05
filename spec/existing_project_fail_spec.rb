@@ -14,9 +14,9 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 	
         it "Successful login" do
 	       
-          login.login_user(email, password, name)
-	        @browser.wait_until{@browser.div(:class=>"project-space").exists?}
-		      expect(@browser.text).to include(name)
+           login.login_user(email, password, name)
+	         @browser.wait_until{@browser.div(:class=>"project-space").exists?}
+		       expect(@browser.text).to include(name)
 
         end
 
@@ -65,10 +65,11 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 
    	  it "Page with textboxes to add information about project" do
 
-   		  project.click_on_existing_project
-   		  @browser.wait_until{@browser.div(:class=>"container new-project").exist?}
-		  expect(@browser.text).to include("Create Existing Project")
-   	  end
+   		   project.click_on_existing_project
+   		   @browser.wait_until{@browser.div(:class=>"container new-project").exist?}
+		     expect(@browser.text).to include("Create Existing Project")
+   	  
+      end
   
    end
 
@@ -89,8 +90,8 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
  
     	it "Dropdown menu" do
 
-           login.click_on_image
-   		     expect(@browser.button(:class, ""))
+          login.click_on_image
+   		    expect(@browser.button(:class, ""))
 
     	end
 
@@ -101,14 +102,14 @@ RSpec.describe "Create Existing Project with empty textboxes for details" do
 
 	   it"User is logged out" do
 
-		    login.logout
-		    expect(@browser.div(:class=>"header"))
+		     login.logout
+		     expect(@browser.div(:class=>"header"))
 
 	   end
 
 	   it "Browser close" do
 
-		   login.browser_close
+		     login.browser_close
 
 	   end
   

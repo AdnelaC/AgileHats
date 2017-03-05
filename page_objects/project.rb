@@ -11,6 +11,7 @@ class Project
 	def click_on_project
 
 		@browser.link(:text =>"PROJECTS").when_present(timeout=300).click
+	
 	end
 
 	def click_on_create_project
@@ -41,13 +42,14 @@ class Project
 	def add_description (description)
 
 		@browser.textarea(:id=>"description").set(description)
+	
 	end	
 
 	def add_information (why, what, how)
 
-		  @browser.textarea(:id, "description_why").set(why)
-	      @browser.textarea(:id, "description_what").set(what)
-	      @browser.textarea(:id, "description_how").set(how)
+	    @browser.textarea(:id, "description_why").set(why)
+	    @browser.textarea(:id, "description_what").set(what)
+	    @browser.textarea(:id, "description_how").set(how)
 
 	end
 
@@ -55,9 +57,10 @@ class Project
 
 	def add_sponsors (sponsor)
 
-		  @browser.text_field(:class=>"autocomplete-input ember-view ember-text-field", :placeholder =>"Search or enter email to add people...").set(sponsor)
-		  @browser.wait_until {@browser.button(:class=>"message btn-link").exists?}
-		  @browser.button(:class=> "message btn-link").click
+		@browser.text_field(:class=>"autocomplete-input ember-view ember-text-field", :placeholder =>"Search or enter email to add people...").set(sponsor)
+		@browser.wait_until {@browser.button(:class=>"message btn-link").exists?}
+		@browser.button(:class=> "message btn-link").click
+	
 	end
 
 
@@ -126,5 +129,22 @@ class Project
 		@browser.link(:text=>"DASHBOARD").click
 
 	end
+
+	def upload_photo
+
+		path="/home/adnela/Desktop/logo.jpg"
+		@browser.input(:class=>"fileInput ember-view ember-text-field").send_keys path
+
+	end
+
+	def upload_document
+
+		path="/home/adnela/Desktop/document.txt"
+		@browser.input(:class=>"fileInput ember-view ember-text-field").send_keys path
+	end
+
+	
+
+
 
 end

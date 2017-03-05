@@ -64,6 +64,8 @@ let(:email){"email_"+rng.rand(100).to_s+"@hotmail.com"}
   		it "List of companies" do
 
   			register.click_on_signup
+        expect{@browser.div(:class=> "spaces-paneul ui-buttonset").exists?}
+        
 
   		end
 
@@ -74,10 +76,10 @@ let(:email){"email_"+rng.rand(100).to_s+"@hotmail.com"}
   		
       it "New window" do
 
-            @browser.wait_until(timeout=300){@browser.div(:class=> "spaces-paneul ui-buttonset").exists?}
+           #@browser.wait_until(timeout=900){@browser.div(:class=> "spaces-paneul ui-buttonset").exists?}
   			   register.click_on_createnew
   		end
    
-   end
+  end
 
 end

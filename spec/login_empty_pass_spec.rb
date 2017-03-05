@@ -23,7 +23,7 @@ RSpec.describe "Test Login with correct email and empty password" do
 
 	   it "Browser close" do
 
-		   login.browser_close
+		    login.browser_close
 
 	   end
 

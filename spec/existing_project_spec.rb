@@ -58,9 +58,9 @@ RSpec.describe "Create Existing Project with filled textboxes for details" do
 
      it "Page with two options to choose type of Project" do
 
-        project.click_on_create_project
-        @browser.wait_until{@browser.div(:class=>"content").exist?}
-        expect(@browser.text).to include("Select type of project")
+         project.click_on_create_project
+         @browser.wait_until{@browser.div(:class=>"content").exist?}
+         expect(@browser.text).to include("Select type of project")
     
     end
    
@@ -112,9 +112,9 @@ RSpec.describe "Create Existing Project with filled textboxes for details" do
 
 		  it "Form with textboxes to add information about responsibility" do 
 
-            @browser.wait_until{@browser.button(:class, "btn btn-gray btn-vacant-responsibility pull-left").exists?}
-			      project.click_on_create_new
-			      expect(@browser.text).to include("Create New Responsibility")
+          @browser.wait_until{@browser.button(:class, "btn btn-gray btn-vacant-responsibility pull-left").exists?}
+			    project.click_on_create_new
+			    expect(@browser.text).to include("Create New Responsibility")
 		
       end
 
@@ -151,10 +151,11 @@ RSpec.describe "Create Existing Project with filled textboxes for details" do
   context "Click on Next" do
 
 	   it "Switch to Attachments page" do
-	      @browser.wait_until{@browser.button(:class, 'btn btn-green pull-right').exists? }
-		    project.click_on_next
-		    @browser.wait_until{(@browser.button(:class=>"btn btn-default select-file")).exists?}
-		    expect(@browser.text).to include("Upload photos, documents, media and other files" )
+	      
+         @browser.wait_until{@browser.button(:class, 'btn btn-green pull-right').exists? }
+		     project.click_on_next
+		     @browser.wait_until{(@browser.button(:class=>"btn btn-default select-file")).exists?}
+		     expect(@browser.text).to include("Upload photos, documents, media and other files" )
 			
 	    end
 
@@ -177,8 +178,8 @@ RSpec.describe "Create Existing Project with filled textboxes for details" do
 
      	it "Menu for edit" do
 
-   		  project.click_on_edit_project 
-   	    expect(@browser.button(:class=>"btn btn-delete pull-right"))
+   		   project.click_on_edit_project 
+   	     expect(@browser.button(:class=>"btn btn-delete pull-right"))
 
    	  end
 
@@ -188,7 +189,7 @@ RSpec.describe "Create Existing Project with filled textboxes for details" do
 
     	it "Pop up menu" do
 
-    		project.click_on_delete
+    		 project.click_on_delete
 
    	 end
 

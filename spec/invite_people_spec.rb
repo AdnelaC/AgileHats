@@ -9,28 +9,29 @@ RSpec.describe "Test Invite people with valid name" do
 	let(:login) { Login.new(@browser)}
 	let(:people) {People.new(@browser)}
    let(:rng) {Random.new}
-   let(:email_invite){"neki_"+rng.rand(100).to_s+"@hotmail.com"}
+   let(:email_invite){"ne_"+rng.rand(100).to_s+"@hotmail.com"}
 
 	context "Login page" do
 	
-        it "Successful login" do
+      it "Successful login" do
 	       
-           login.login_user(email, password, name)
-	        @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
-		     expect(@browser.text).to include(name)
+         login.login_user(email, password, name)
+	      @browser.wait_until{@browser.url=="http://ah-test.abhapp.com/profile"}
+		   expect(@browser.text).to include(name)
 			
-         end
+      end
 
    end
 
    context "People tab" do
 
-   	  it "Switch to People tab" do
+   	it "Switch to People tab" do
 
-   		  people.click_on_people
-   		  @browser.wait_until{@browser.div(:class=>"content").exist?}
-   		  expect(@browser.text).to include("People")
-   	  end
+   		people.click_on_people
+   		@browser.wait_until{@browser.div(:class=>"content").exist?}
+   		expect(@browser.text).to include("People")
+   	 
+      end
 
    end
 
@@ -84,8 +85,7 @@ RSpec.describe "Test Invite people with valid name" do
    	it "Check is invited user in list" do
    
    		people.click_on_tab_invited_users
-         #@browser.wait_until{@browser.div(:class=>"invitation-container").exist?}
-         #expect(@browser.div(:class=>"invitation-container").text).to include(email_invite)
+         expect(@browser.div(:class=>"invitation-container").text).to include(email_invite)
 
    	end
    end
@@ -95,8 +95,8 @@ RSpec.describe "Test Invite people with valid name" do
  
       it "Dropdown menu" do
 
-           login.click_on_image
-            expect(@browser.button(:class, ""))
+         login.click_on_image
+         expect(@browser.button(:class, ""))
 
       end
 
